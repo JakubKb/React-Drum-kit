@@ -1,8 +1,14 @@
 import "./App.css";
+import { useState } from "react";
+import boomMp from "./assets/sounds/boom.mp3";
 
 function Boom() {
+  function playSound() {
+    const boomSound = new Audio(boomMp);
+    boomSound.play();
+  }
   return (
-    <div className="button">
+    <div className="button" onClick={playSound}>
       <div className="boom">
         <h4 className="key">A</h4>
         <h2>Boom</h2>
