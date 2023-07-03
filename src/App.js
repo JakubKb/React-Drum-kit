@@ -1,122 +1,57 @@
 import "./App.css";
-import { useState } from "react";
-import boomMp from "./assets/sounds/boom.mp3";
 
-function Boom() {
+function SoundButton({ sound, keyChar, name }) {
   function playSound() {
-    const boomSound = new Audio(boomMp);
-    boomSound.play();
+    const soundObj = new Audio(sound);
+    soundObj.play();
   }
+
   return (
     <div className="button" onClick={playSound}>
-      <div className="boom">
-        <h4 className="key">A</h4>
-        <h2>Boom</h2>
-      </div>
-    </div>
-  );
-}
-function Clap() {
-  return (
-    <div className="button">
-      <div className="clap">
-        <h4 className="key">S</h4>
-        <h2>Clap</h2>
-      </div>
-    </div>
-  );
-}
-
-function Hihat() {
-  return (
-    <div className="button">
-      <div className="hihat">
-        <h4 className="key">D</h4>
-        <h2>Hihat</h2>
-      </div>
-    </div>
-  );
-}
-
-function Kick() {
-  return (
-    <div className="button">
-      <div className="kick">
-        <h4 className="key">F</h4>
-        <h2>Kick</h2>
-      </div>
-    </div>
-  );
-}
-
-function OpenHat() {
-  return (
-    <div className="button">
-      <div className="openhat">
-        <h4 className="key">G</h4>
-        <h2>Openhat</h2>
-      </div>
-    </div>
-  );
-}
-
-function Ride() {
-  return (
-    <div className="button">
-      <div className="ride">
-        <h4 className="key">H</h4>
-        <h2> Ride</h2>
-      </div>
-    </div>
-  );
-}
-
-function Snare() {
-  return (
-    <div className="button">
-      <div className="snare">
-        <h4 className="key">J</h4>
-        <h2>Snare</h2>
-      </div>
-    </div>
-  );
-}
-
-function Tink() {
-  return (
-    <div className="button">
-      <div className="tink">
-        <h4 className="key">K</h4>
-        <h2>Tink</h2>
-      </div>
-    </div>
-  );
-}
-
-function Tom() {
-  return (
-    <div className="button">
-      <div className="tom">
-        <h4 className="key">L</h4>
-        <h2>Tom</h2>
+      <div className={name.toLowerCase()}>
+        <h4 className="key">{keyChar}</h4>
+        <h2>{name}</h2>
       </div>
     </div>
   );
 }
 
 export default function DrumKit() {
+  const soundData = [
+    { sound: require("./assets/sounds/boom.mp3"), keyChar: "A", name: "Boom" },
+    { sound: require("./assets/sounds/clap.mp3"), keyChar: "S", name: "Clap" },
+    {
+      sound: require("./assets/sounds/hihat.mp3"),
+      keyChar: "D",
+      name: "Hihat",
+    },
+    { sound: require("./assets/sounds/kick.mp3"), keyChar: "F", name: "Kick" },
+    {
+      sound: require("./assets/sounds/openhat.mp3"),
+      keyChar: "G",
+      name: "Openhat",
+    },
+    { sound: require("./assets/sounds/ride.mp3"), keyChar: "H", name: "Ride" },
+    {
+      sound: require("./assets/sounds/snare.mp3"),
+      keyChar: "J",
+      name: "Snare",
+    },
+    { sound: require("./assets/sounds/tink.mp3"), keyChar: "K", name: "Tink" },
+    { sound: require("./assets/sounds/tom.mp3"), keyChar: "L", name: "Tom" },
+  ];
+
   return (
     <>
       <div className="drum-kit">
-        <Boom />
-        <Clap />
-        <Hihat />
-        <Kick />
-        <OpenHat />
-        <Ride />
-        <Snare />
-        <Tink />
-        <Tom />
+        {soundData.map((sound) => (
+          <SoundButton
+            key={sound.keyChar}
+            sound={sound.sound}
+            keyChar={sound.keyChar}
+            name={sound.name}
+          />
+        ))}
       </div>
     </>
   );
